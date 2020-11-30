@@ -46,7 +46,6 @@ RSpec.describe Item, type: :model do
     it "発送までの日数についての情報が１だと登録できないこと" do
       @item.delivery_days_id = 1
       @item.valid?
-      binding.pry
       expect(@item.errors.full_messages).to include("Delivery days must be other than 1")
     end
     it "価格についての情報が必須であること" do
