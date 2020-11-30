@@ -8,6 +8,8 @@ class Item < ApplicationRecord
   validates :delivery_area_id, presence: true
   validates :delivery_days_id, presence: true
   validates :price, presence: true
+  validates_inclusion_of :price, in:300..9999999, message: 'Out of setting range'
+  validates :price, numericality: { with: /\A[0-9]+\z/, message:'Half-width number' }
   validates :image, presence: true
 
   belongs_to :user
