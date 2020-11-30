@@ -1,16 +1,14 @@
 class Item < ApplicationRecord
 
-  validates :name, presence: true
-  validates :explanation, presence: true
-  validates :category_id, presence: true
-  validates :condition_id, presence: true
-  validates :delivery_fee_id, presence: true
-  validates :delivery_area_id, presence: true
-  validates :delivery_days_id, presence: true
-  validates :price, presence: true
+  with_options presence:true do
+    validates :name
+    validates :explanation
+    validates :price
+    validates :image
+  end
+
   validates_inclusion_of :price, in:300..9999999, message: 'Out of setting range'
   validates :price, numericality: { with: /\A[0-9]+\z/, message:'Half-width number' }
-  validates :image, presence: true
 
   belongs_to :user
   has_one    :purchase
