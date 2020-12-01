@@ -6,8 +6,9 @@ RSpec.describe Item, type: :model do
   end
 
   describe '商品の出品' do
-
-  
+    it "全ての商品が登録できること" do
+      expect(@item).to be_valid
+    end
     it "商品画像を一枚つけることが必須であること" do
       @item.image = nil
       @item.valid?
