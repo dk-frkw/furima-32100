@@ -1,8 +1,8 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
   
   def index
-    @item = Item.find(params[:item_id])
     @purchase_shipping_address = PurchaseShippingAddress.new
     if current_user.id == @item.user_id || @item.purchase.present?
       redirect_to root_path
@@ -10,7 +10,6 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_shipping_address = PurchaseShippingAddress.new(purchase_params)
     
     if @purchase_shipping_address.valid?
@@ -35,5 +34,9 @@ class PurchasesController < ApplicationController
         card: purchase_params[:token],    # カードトークン
         currency: 'jpy'                 # 通貨の種類（日本円）
       )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end

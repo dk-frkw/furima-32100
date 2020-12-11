@@ -52,10 +52,27 @@ RSpec.describe PurchaseShippingAddress, type: :model do
       expect(@purchase_shipping_address.errors.full_messages).to include("Phone number is invalid")
     end
 
-    it "正しいクレジットカードの情報で無いときは決済できないこと" do
+    it '正しいクレジットカードの情報で無いときは決済できないこと' do
       @purchase_shipping_address.token = nil
       @purchase_shipping_address.valid?
       expect(@purchase_shipping_address.errors.full_messages).to include("Token can't be blank")
+    end
+
+    it 'user_idが空の場合は登録出来ないこと' do
+      @purchase_shipping_address.user_id = nil
+      @purchase_shipping_address.valid?
+      expect(@purchase_shipping_address.errors.full_messages).to include("User can't be blank")
+    end
+
+    it 'item_idが空の場合は登録が出来ないこと' do
+      @purchase_shipping_address.item_id = nil
+      @purchase_shipping_address.valid?
+      expect(@purchase_shipping_address.errors.full_messages).to include("Item can't be blank")
+    end
+
+    it '建物名が空でも登録ができること' do
+      @purchase_shipping_address.building_name = ""
+      expect(@purchase_shipping_address).to be_valid
     end
   end
 end
