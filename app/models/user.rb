@@ -19,6 +19,6 @@ class User < ApplicationRecord
   validates :birth_date, presence: true
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: 'に6文字以上の半角英数混合で入力して下さい'}
 
-  has_many :itmes
+  has_many :items
   has_many :purchases
 end
