@@ -27,7 +27,7 @@
 
     <%# 詳細画面の内容 %>
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合 %>
-    <% if user_signed_in? && current_user.id == @item.user.id %>
+    <% if user_signed_in? && current_user.id == @item.user.id && @item.purchase.nil? %>
     <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
     <p class='or-text'>or</p>
     <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
